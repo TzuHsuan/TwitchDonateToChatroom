@@ -19,9 +19,15 @@ namespace TwitchDonateToChatroom.ViewModels
 
         private IOpayCheckService _opayCheckService;
 
+        private IOpayCheckService _ecpayCheckService;
+
         private IConfigService _configService;
 
+        public TwitchIRCService irc;
+
         private string _opayId = null;
+
+        private string _ecpayId = null;
 
         private string _channelName = null;
 
@@ -57,10 +63,16 @@ namespace TwitchDonateToChatroom.ViewModels
             get => _opayId;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                    ShowMessageBox("歐付寶 ID 沒填!!");
-                else
                     SetProperty(ref _opayId, value);
+            }
+        }
+
+        public string ECpayId
+        {
+            get => _ecpayId;
+            set
+            {
+                SetProperty(ref _ecpayId, value);
             }
         }
 
@@ -157,14 +169,38 @@ namespace TwitchDonateToChatroom.ViewModels
 
         private void StartCapture(object sender)
         {
+            if (string.IsNullOrWhiteSpace(_opayId) && string.IsNullOrWhiteSpace(ECpayId)){
+                ShowMessageBox("兩種付款服務ID請至少填一個");
+                return;
+            }
             isStart = true;
 
-            _opayCheckService = ActivatorUtilities.CreateInstance<OpayCheckService>(App.ServiceProvider,
-                _opayId,
-                _userName,
-                _oauth,
-                _channelName,
-                _messageTamplate);
+            irc = new TwitchIRCService(_userName, _oauth, _channelName);
+
+            List<IOpayCheckService> paymentProviders = new List<IOpayCheckService>();
+
+            if (!string.IsNullOrWhiteSpace(_ecpayId))
+            {
+                _ecpayCheckService = ActivatorUtilities.CreateInstance<ECpayCheckService>(App.ServiceProvider,
+                    _ecpayId,
+                    _channelName,
+                    _messageTamplate,
+                    irc);
+
+                paymentProviders.Add(_ecpayCheckService);
+            }
+
+            if (!string.IsNullOrWhiteSpace(_opayId))
+            {
+                _opayCheckService = ActivatorUtilities.CreateInstance<OpayCheckService>(App.ServiceProvider,
+                    _opayId,
+                    _channelName,
+                    _messageTamplate,
+                    irc);
+
+                paymentProviders.Add(_opayCheckService);
+            }
+
 
             Task.Run(async () =>
             {
@@ -172,7 +208,10 @@ namespace TwitchDonateToChatroom.ViewModels
                 {
                     CTS.Token.ThrowIfCancellationRequested();
 
-                    await _opayCheckService.Timer_ElapsedAsync();
+                    paymentProviders.ForEach(async provider =>
+                    {
+                        await provider.Timer_ElapsedAsync();
+                    });
 
                     CTS.Token.ThrowIfCancellationRequested();
 

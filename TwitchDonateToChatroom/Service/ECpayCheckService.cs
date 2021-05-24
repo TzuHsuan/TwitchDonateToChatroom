@@ -1,39 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
+using System.Text;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
+using System.Threading.Tasks;
 using TwitchDonateToChatroom.Models;
-using TwitchDonateToChatroom.Service.Interface;
 
 namespace TwitchDonateToChatroom.Service
 {
-    public class OpayCheckService : PaymentCheckService
+    class ECpayCheckService : PaymentCheckService 
     {
+        private readonly string apiEndpoint = "https://payment.ecpay.com.tw/Broadcaster/CheckDonate/";
 
-        #region Fields
+        private readonly string paymentServiceName = "綠界";
 
-        private readonly string apiEndpoint = "https://payment.opay.tw/Broadcaster/CheckDonate/";
-
-        private readonly string paymentServiceName = "歐付寶";
-
-        #endregion
-
-        #region Constructor
-
-        public OpayCheckService(string opayid, string channelName, string messageTemplate, TwitchIRCService irc) : base(opayid, channelName, messageTemplate, irc)
+        public ECpayCheckService(string paymentid, string channelName, string messageTemplate, TwitchIRCService sendMsg) : base(paymentid, channelName, messageTemplate, sendMsg)
         {
         }
-
-        #endregion
-
-        #region Events
 
         public override async Task Timer_ElapsedAsync()
         {
@@ -44,12 +28,17 @@ namespace TwitchDonateToChatroom.Service
                 if (response.IsSuccessStatusCode)
                 {
                     var list = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+                    //string json = "[{'donateid':'10311031','name':'XXX','amount':100,'msg':'這是一筆贊助測試～'}]".Replace("'", "\"");
+                    //var list = JsonDocument.Parse(json);
 
-                    var donateList = list.RootElement.GetProperty("lstDonate");
+                    var donateList = list.RootElement;
 
                     if (donateList.GetArrayLength() > 0)
                     {
+
                         List<Member> donates = JsonSerializer.Deserialize<List<Member>>(donateList.ToString());
+
+                        MessageBox.Show(donates[0].msg);
 
                         DonateProcess(donates);
                     }
@@ -61,6 +50,5 @@ namespace TwitchDonateToChatroom.Service
             }
         }
 
-        #endregion
     }
 }

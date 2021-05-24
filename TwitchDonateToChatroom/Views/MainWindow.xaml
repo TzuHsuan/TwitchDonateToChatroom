@@ -10,139 +10,163 @@
     Height="425"
     mc:Ignorable="d">
     <Grid Margin="0,0,0,0">
-        <TextBox
-            Name="opayid"
-            Width="262"
-            Height="30"
-            Margin="156,26,0,0"
+        <Grid HorizontalAlignment="Left" Margin="35,25,0,0" VerticalAlignment="Top" Width="380">
+            <TextBox
+                x:Name="opayid"
+                Width="260"
+                Height="30"
+                Margin="120,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="16"
+                RenderTransformOrigin="0.496,0.522"
+                TextWrapping="Wrap" />
+            <Label
+                Width="120"
+                Height="30"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="歐付寶ID:"
+                FontSize="16"
+                RenderTransformOrigin="0.32,1.267" />
+        </Grid>
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="380" Margin="35,225,0,0" Height="34">
+            <Label
+                Width="120"
+                Height="30"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="機器人OAuth:"
+                FontSize="16"
+                RenderTransformOrigin="0.511,-0.933" />
+            <TextBox
+                x:Name="twitchoauth"
+                Width="260"
+                Height="30"
+                Margin="120,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="16"
+                RenderTransformOrigin="1.366,0.522"
+                TextWrapping="Wrap" />
+        </Grid>
+        <TextBlock
+            Width="112"
+            Height="15"
+            Margin="156,256,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            FontSize="16"
-            RenderTransformOrigin="0.496,0.522"
-            TextWrapping="Wrap" />
-        <Label
-            Width="122"
-            Height="30"
-            Margin="34,24,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="輸入歐付寶ID:"
-            FontSize="16"
-            RenderTransformOrigin="0.32,1.267" />
-        <Label
-            Width="129"
-            Height="30"
-            Margin="34,160,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="Twitch OAuth:"
-            FontSize="16"
-            RenderTransformOrigin="0.511,-0.933" />
-        <TextBox
-            Name="twitchoauth"
-            Width="262"
-            Height="30"
-            Margin="156,160,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontSize="16"
-            RenderTransformOrigin="1.366,0.522"
-            TextWrapping="Wrap" />
+            RenderTransformOrigin="-0.882,-0.276"
+            TextDecorations="{x:Null}"
+            TextWrapping="Wrap" FontSize="10"><Run Text="" /><Hyperlink Click="Hyperlink_Click" NavigateUri="https://twitchapps.com/tmi/"><Run Text="Twitch OAuth點這裡取得"/></Hyperlink><LineBreak /><Run /></TextBlock>
+
         <Button
             Width="84"
             Height="32"
-            Margin="112,293,0,0"
+            Margin="112,347,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="Button_Click"
-            Content="確定"
+            Content="執行"
             FontSize="16"
             RenderTransformOrigin="2.022,11.638" />
-        <Label
-            Width="129"
-            Height="30"
-            Margin="34,114,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="Twitch ID:"
-            FontSize="16"
-            RenderTransformOrigin="0.511,-0.933" />
-        <TextBox
-            Name="username"
-            Width="262"
-            Height="30"
-            Margin="156,114,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontSize="16"
-            RenderTransformOrigin="1.633,0.5"
-            TextWrapping="Wrap" />
-        <Label
-            Width="129"
-            Height="30"
-            Margin="34,70,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="頻道 ID:"
-            FontSize="16"
-            RenderTransformOrigin="0.511,-0.933" />
-        <TextBox
-            Name="channelname"
-            Width="262"
-            Height="30"
-            Margin="156,70,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontSize="16"
-            RenderTransformOrigin="1.633,0.5"
-            TextWrapping="Wrap" />
-        <TextBlock
-            Width="193"
-            Height="27"
-            Margin="144,261,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontSize="16"
-            RenderTransformOrigin="-0.882,-0.276"
-            TextDecorations="{x:Null}"
-            TextWrapping="Wrap"><Run Text="" /><Hyperlink Click="Hyperlink_Click" NavigateUri="https://twitchapps.com/tmi/">Twitch OAuth點這裡取得</Hyperlink><LineBreak /><Run /></TextBlock>
-        <TextBlock
-            Name="state"
-            Width="156"
-            Height="57"
-            Margin="43,327,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            TextWrapping="Wrap" />
-        <Label
-            Width="129"
-            Height="30"
-            Margin="34,214,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="訊息模板:"
-            FontSize="16"
-            RenderTransformOrigin="0.511,-0.933" />
-        <TextBox
-            Name="messagetemplate"
-            Width="262"
-            Height="30"
-            Margin="156,214,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontSize="16"
-            RenderTransformOrigin="1.366,0.522"
-            TextWrapping="Wrap" />
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="380" Margin="35,175,0,0">
+            <Label
+                Width="120"
+                Height="30"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="機器人帳號:"
+                FontSize="16"
+                RenderTransformOrigin="0.511,-0.933" />
+            <TextBox
+                x:Name="username"
+                Width="260"
+                Height="30"
+                Margin="120,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="16"
+                RenderTransformOrigin="1.633,0.5"
+                TextWrapping="Wrap" />
+        </Grid>
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="380" Margin="35,125,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="151*"/>
+                <ColumnDefinition Width="194*"/>
+            </Grid.ColumnDefinitions>
+            <Label
+                Width="120"
+                Height="30"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Twitch頻道:"
+                FontSize="16"
+                RenderTransformOrigin="0.511,-0.933" />
+            <TextBox
+                x:Name="channelname"
+                Width="260"
+                Height="30"
+                Margin="120,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontSize="16"
+                RenderTransformOrigin="1.633,0.5"
+                TextWrapping="Wrap" Grid.ColumnSpan="2" />
+        </Grid>
+
+        
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="380" Margin="35,275,0,0">
+            <Label
+                Width="120"
+                Height="30"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="訊息模板:"
+                FontSize="16"
+                RenderTransformOrigin="0.511,-0.933" />
+            <TextBox
+                x:Name="messagetemplate"
+                Width="260"
+                Height="30"
+                Margin="120,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="16"
+                RenderTransformOrigin="1.366,0.522"
+                TextWrapping="Wrap" />
+        </Grid>
         <Button
             Width="84"
             Height="32"
-            Margin="264,293,0,0"
+            Margin="264,347,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="Button_Click_1"
             Content="儲存"
             FontSize="16"
             RenderTransformOrigin="2.022,11.638" />
+        <Grid HorizontalAlignment="Left" Margin="35,75,0,0" VerticalAlignment="Top" Width="380">
+            <TextBox
+                x:Name="ecpayid"
+                Width="260"
+                Height="30"
+                Margin="120,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="16"
+                RenderTransformOrigin="0.496,0.522"
+                TextWrapping="Wrap" />
+            <Label
+                Width="120"
+                Height="30"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="綠界ID:"
+                FontSize="16"
+                RenderTransformOrigin="0.32,1.267" />
+
+        </Grid>
 
     </Grid>
 </Window>

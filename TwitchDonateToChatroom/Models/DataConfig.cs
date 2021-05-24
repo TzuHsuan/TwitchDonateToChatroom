@@ -4,6 +4,7 @@
     {
         public string OpayId { get; set; }
 
+        public string ECpayId { get; set; }
         public string ChannelName { get; set; }
 
         public string UserName { get; set; }

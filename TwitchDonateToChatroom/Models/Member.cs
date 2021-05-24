@@ -2,12 +2,12 @@
 {
     public class Member
     {
-        public int DonateId { get; set; }
+        public string donateid { get; set; }
 
-        public string Name { get; set; }
+        public string name { get; set; }
 
-        public int Amount { get; set; }
+        public int amount { get; set; }
 
-        public string Msg { get; set; }
+        public string msg { get; set; }
     }
 }
